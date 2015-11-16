@@ -1,13 +1,3 @@
-# Load packages
-library(TraMineR)
-library(cluster)
-library(stringr) # for the find/replace function in read_seqdata_notime
-library(network)
-library(sna)
-library(sqldf)
-library(WeightedCluster)
-library(knitr)
-library(irr)
 
 # Winston says to use an R project instead so I can use a relative path
 setwd("/Users/aron/git/4cases_routines/analysis")

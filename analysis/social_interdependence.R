@@ -1,16 +1,3 @@
-# Load necessary packages
-library(sqldf)
-library(network)
-library(TraMineR)
-library(cluster)
-library(stringr) # for the find/replace function in read_seqdata_notime
-library(network)
-library(sna)
-library(sqldf)
-library(WeightedCluster)
-library(plyr)
-library(igraph)
-
 # load the data
 create_network <- function(project){
   
