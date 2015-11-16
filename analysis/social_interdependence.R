@@ -1,7 +1,7 @@
 # load the data
 create_network <- function(project){
   
-  dat <- read_seqdata_for_network(paste0("/Users/aron/git/github-activities/data/activity-", project, ".txt"), '2012-01-06', '2013-01-06')
+  dat <- read_seqdata_for_network(paste0("/Users/aron/git/4cases_routines/data/activity-", project, ".txt"), '2012-01-06', '2013-01-06')
   
   dat_split <- split(dat, dat$id)
   
