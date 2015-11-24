@@ -1,28 +1,15 @@
-# Load data
-django_TSE <- read_seqdata_for_network("/Users/aron/git/4cases_routines/data/activity-django-django.txt", '2012-01-06', '2013-01-06')
-rails_TSE <- read_seqdata_for_network("/Users/aron/git/4cases_routines/data/activity-rails-rails.txt", '2012-01-06', '2013-01-06')
-rubinius_TSE <- read_seqdata_for_network("/Users/aron/git/4cases_routines/data/activity-rubinius-rubinius.txt", '2012-01-06', '2013-01-06')
-bootstrap_TSE <- read_seqdata_for_network("/Users/aron/git/4cases_routines/data/activity-twitter-bootstrap.txt", '2012-01-06', '2013-01-06')
+# Construct objects
+django_TSE <- SequenceObject("/Users/aron/git/github-activities/data/activity-django-django.txt", '2012-01-06', '2013-01-06', type = "TSE", exclude = c("synchronize", "subscribed", "unsubscribed", "head_ref_cleaned", "head_ref_deleted", "head_ref_restored"))
 
-# Load include-list & # generate a subset object
-django_include <- read.csv("/Users/aron/git/4cases_routines/data/django_include.csv", header = FALSE)
-django_include <- c(do.call("cbind", django_include)) 
-django_include <- as.character(django_include)
-django_TSE <- django_TSE[django_TSE$id %in% django_include,]
+rails_TSE <- SequenceObject("/Users/aron/git/github-activities/data/activity-rails-rails.txt", '2012-01-06', '2013-01-06', type = "TSE", exclude = c("synchronize", "subscribed", "unsubscribed", "head_ref_cleaned", "head_ref_deleted", "head_ref_restored"))
 
-rails_include <- read.csv("/Users/aron/git/4cases_routines/data/rails_include.csv", header = FALSE)
-rails_include <- c(do.call("cbind", rails_include)) 
-rails_include <- as.character(rails_include)
+rubinius_TSE <- SequenceObject("/Users/aron/git/github-activities/data/activity-rubinius-rubinius.txt", '2012-01-06', '2013-01-06', type = "TSE", exclude = c("synchronize", "subscribed", "unsubscribed", "head_ref_cleaned", "head_ref_deleted", "head_ref_restored"))
+
+bootstrap_TSE <- SequenceObject("/Users/aron/git/github-activities/data/activity-twitter-bootstrap.txt", '2012-01-06', '2013-01-06', type = "TSE", exclude = c("synchronize", "subscribed", "unsubscribed", "head_ref_cleaned", "head_ref_deleted", "head_ref_restored"))
+
+django_TSE <-  django_TSE[django_TSE$id %in% django_include,]
 rails_TSE <- rails_TSE[rails_TSE$id %in% rails_include,]
-
-rubinius_include <- read.csv("/Users/aron/git/4cases_routines/data/rubinius_include.csv", header = FALSE)
-rubinius_include <- c(do.call("cbind", rubinius_include)) 
-rubinius_include <- as.character(rubinius_include)
 rubinius_TSE <- rubinius_TSE[rubinius_TSE$id %in% rubinius_include,]
-
-bootstrap_include <- read.csv("/Users/aron/git/4cases_routines/data/bootstrap_include.csv", header = FALSE)
-bootstrap_include <- c(do.call("cbind", bootstrap_include)) 
-bootstrap_include <- as.character(bootstrap_include)
 bootstrap_TSE <- bootstrap_TSE[bootstrap_TSE$id %in% bootstrap_include,]
 
 # Calculate sequential variations
