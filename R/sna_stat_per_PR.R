@@ -1,5 +1,5 @@
 sna_stat_per_PR <- function(data, stat){
-  
+#stat = "graph.density"; data = rubinius  
   data_split <- split(data, data$id)
   
   actors_per_PR <- list()
@@ -14,26 +14,42 @@ sna_stat_per_PR <- function(data, stat){
   }
   
   actor_lists_merged <- lapply(actors_per_PR, combine_edge_lists)
-  browser()
+#  browser()
   
   actor_graphs <- list()
   for (i in 1:length(actor_lists_merged)){
-    actor_graphs[[i]] <- tryNULL(graph.edgelist(actor_lists_merged[[i]]))
-      }
-  actor_graphs[[length(unique(data$id))]] <- NA
-  
-  output <- list()
-  for (i in 1:length(actor_graphs)){
-    tryNULL(output[[i]] <- eval(parse(text=paste0("igraph::", stat, "(actor_lists_merged[[i]])"))))
+    merged <- actor_lists_merged[[i]]
+    graph <- NA
+    if (!is.null(merged)) {
+      graph <- graph.edgelist(merged)
     }
-  output[[length(unique(data$id))]] <- NA
+    actor_graphs[[i]] <- graph
+  }
+
+  output <- list()
+  browser()
+  print(paste0("length of actor_graphs = ", length(actor_graphs)))
+  for (i in 1:length(actor_graphs)){
+    command = parse(text=paste0("igraph::", stat, "(actor_lists_merged[[i]])"))
+    print(class(actor_lists_merged[[i]]))
+#    tryNULL(eval(command))
+    print(command)
+    output[[i]] <- tryNULL(eval(command))
+    }
+#  output[[length(unique(data$id))]] <- NA
+  print("goodbye")
   
+  print(output)
   for (i in 1:length(output)){
+    print(i)
+    print(output[[i]])
     if(is.null(output[[i]]))
       output[[i]] <- 0
     if(is.na(output[[i]]))
       output[[i]] <- 0
   }
+  
+  print("blah")
   
   output <- unlist(output)
   output <- as.data.frame(output)
