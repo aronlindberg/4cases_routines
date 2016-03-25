@@ -24,7 +24,7 @@ SequenceObject <- function(data, startdate, stopdate, exclude = c(), type){
     }
     data <- list.to.df(data.split)
     data <- t(data)
-
+    (data)
     # Another type of output for TraMineR TSE format
   } else {
     data$end <- data$time
@@ -32,7 +32,7 @@ SequenceObject <- function(data, startdate, stopdate, exclude = c(), type){
     data$time <- match( data$time , unique( data$time ) )
     data$end <- match( data$end , unique( data$end ) )
     slmax <- max(data$time)
-    
+    (arrange(data, id))  
   }
-  (arrange(data, id))
+  
 }
