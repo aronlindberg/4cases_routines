@@ -11,3 +11,4 @@ lapply(required_packages, library, character.only = TRUE)
 script_list <- list("/Users/aron/git/generic_oss_functions/R/functions.R", "R/SequenceObject.R", "R/sna_stat_per_PR.R", "analysis/routine_variation.R")
 for (i in 1:length(script_list)){
   try(source(script_list[[i]], chdir = TRUE))
+}
